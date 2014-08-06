@@ -511,6 +511,7 @@ sub new {
               ignore_sql_errors => $params->{ignore_sql_errors},
               dumped_objects => {},
               use_create => $params->{use_create} || 0,
+              use_find_or_create => $params->{use_find_or_create} || 0,
               config_attrs => $params->{config_attrs} || {},
   };
 
@@ -1383,7 +1384,9 @@ sub populate {
               $class->restore($key, $content, $args);
             }
           }
-          if ( $params->{use_create} ) {
+          if ( $params->{use_find_or_create} ) {
+            $rs->find_or_create($HASH1);
+          } elsif ( $params->{use_create} ) {
             $rs->create( $HASH1 );
           } else {
             push(@rows, $HASH1);
