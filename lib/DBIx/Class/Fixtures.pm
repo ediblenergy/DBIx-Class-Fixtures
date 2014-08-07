@@ -1191,10 +1191,14 @@ sub dump_all_config_sets {
    # optional, set to 1 to run ddl but not populate 
    no_populate => 0,
 
-	# optional, set to 1 to run each fixture through ->create rather than have
+   # optional, set to 1 to run each fixture through ->create rather than have
    # each $rs populated using $rs->populate. Useful if you have overridden new() logic
-	# that effects the value of column(s).
-	use_create => 0,
+   # that effects the value of column(s).
+   use_create => 0,
+
+   # optional, same as use_create except with find_or_create.
+   # Useful if you are populating a persistent data store.
+   use_find_or_create => 0,
 
    # Dont try to clean the database, just populate over whats there. Requires
    # schema option. Use this if you want to handle removing old data yourself
